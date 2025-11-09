@@ -1,0 +1,78 @@
+/* =============================
+   SitSense — styles.css
+   Custom utilities & visual polish
+   ============================= */
+
+/* Base tweaks */
+html, body { height: 100%; }
+body { color: var(--color-text, #e7eefc); background: var(--color-bg, #0b1220); }
+
+/* Smooth theme switch */
+.theme-transition * { transition: background-color .25s ease, color .25s ease, border-color .25s ease, opacity .25s ease; }
+
+/* Glass / card visuals */
+.glassy-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.06));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.card-border { border: 1px solid rgba(255,255,255,.08); }
+.shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+
+/* Skeleton loader */
+.skeleton { position: relative; overflow: hidden; background: rgba(255,255,255,.06); border-radius: .5rem; }
+.skeleton::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
+  animation: shimmer 1.25s infinite;
+}
+.skeleton-line { height: 12px; }
+.skeleton-pill { height: 28px; border-radius: 9999px; }
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+/* Heatmap canvas treatment */
+#heatmapCanvas { image-rendering: optimizeQuality; filter: contrast(115%) saturate(118%); }
+/* Optional mask if you want to clip the heatmap to a shape */
+.heatmap--masked { 
+  -webkit-mask-image: url('/assets/img/heatmap-mask.svg');
+  mask-image: url('/assets/img/heatmap-mask.svg');
+  -webkit-mask-size: contain; mask-size: contain;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+}
+
+/* Silhouette styling */
+#silhouette { filter: drop-shadow(0 10px 16px rgba(0,0,0,.35)); }
+
+/* Balance bars */
+#balanceLRFill { transition: width .35s ease; background: linear-gradient(90deg, #60a5fa, #22d3ee); }
+#balanceFBFill { transition: width .35s ease; background: linear-gradient(90deg, #34d399, #10b981); }
+
+/* Advice panel */
+#adviceText { min-height: 72px; }
+
+/* Progress (DaisyUI override light touch) */
+progress.progress { --progress-color: var(--color-accent, #5cc8ff); }
+progress.progress::-webkit-progress-value { background: var(--progress-color); }
+progress.progress::-moz-progress-bar { background: var(--progress-color); }
+
+/* Badges by status */
+.badge-status { border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.06); }
+.badge-status[data-status="good"] { color: #10b981; border-color: rgba(16,185,129,.35); background: rgba(16,185,129,.10); }
+.badge-status[data-status="warn"] { color: #f59e0b; border-color: rgba(245,158,11,.35); background: rgba(245,158,11,.10); }
+.badge-status[data-status="bad"]  { color: #ef4444; border-color: rgba(239,68,68,.35);  background: rgba(239,68,68,.10); }
+
+/* Utility helpers */
+.blur-edge { mask-image: radial-gradient(closest-side, #000, transparent); }
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-accent,#5cc8ff), var(--color-accent-2,#79f2c0));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* AOS fine-tune */
+[data-aos] { will-change: transform, opacity; }
+
+/* Accessibility helpers */
+.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+
